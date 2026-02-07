@@ -4,19 +4,9 @@
 #include <QSignalBlocker>
 #include <QDir>
 #include <QFile>
-#include <QRegularExpression>
 #include <QSysInfo>
 
 namespace {
-QString stripQuotes(QString value)
-{
-    value = value.trimmed();
-    if (value.size() >= 2 && value.startsWith('"') && value.endsWith('"')) {
-        value = value.mid(1, value.size() - 2).trimmed();
-    }
-    return value;
-}
-
 QString normalizeArch(QString arch)
 {
     arch = arch.trimmed();
@@ -43,31 +33,58 @@ QString detectArch(Cmd* shell)
     return arch;
 }
 
-QString mxReleaseFromRoot(const QString& rootPath)
+bool isArchBuild(const QString& rootPath)
 {
-    const QString lsbPath = rootPath.isEmpty() ? QStringLiteral("/etc/lsb-release")
-                                               : QDir(rootPath).filePath("etc/lsb-release");
-    QFile file(lsbPath);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return {};
-    }
-    QString distribId;
-    QString distribRelease;
-    while (!file.atEnd()) {
-        const QString line = QString::fromUtf8(file.readLine()).trimmed();
-        if (line.startsWith("DISTRIB_ID=")) {
-            distribId = line.mid(QStringLiteral("DISTRIB_ID=").size());
-        } else if (line.startsWith("DISTRIB_RELEASE=")) {
-            distribRelease = line.mid(QStringLiteral("DISTRIB_RELEASE=").size());
+    const QStringList mkinitcpio = {"/usr/bin/mkinitcpio", "/etc/mkinitcpio.conf"};
+    for (const auto& path : mkinitcpio) {
+        const QString full = rootPath.isEmpty() ? path : QDir(rootPath).filePath(path.mid(1));
+        if (QFile::exists(full)) {
+            return true;
         }
     }
-    distribId = stripQuotes(distribId);
-    distribRelease = stripQuotes(distribRelease);
-    if (!distribId.toLower().startsWith("mx")) {
-        return {};
+    return false;
+}
+
+bool dirContainsEfi(const QDir& dir)
+{
+    const QStringList files = dir.entryList(QDir::Files);
+    for (const auto& file : files) {
+        if (file.endsWith(".efi", Qt::CaseInsensitive)) {
+            return true;
+        }
     }
-    distribRelease.remove(QRegularExpression("[^A-Za-z0-9]"));
-    return distribRelease.left(2);
+    return false;
+}
+
+QString detectBootloaderId(const QString& efiMountPath, const QString& rootPath)
+{
+    const QString fallback = isArchBuild(rootPath) ? QStringLiteral("MXarch") : QStringLiteral("MX");
+
+    // Look for existing MX* directories on the ESP that contain a GRUB binary.
+    const QDir efiDir(efiMountPath + "/EFI");
+    if (!efiDir.exists()) {
+        return fallback;
+    }
+    // Collect all MX* candidates that have .efi files.
+    QStringList candidates;
+    const QStringList entries = efiDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const auto& entry : entries) {
+        if (entry.startsWith("MX", Qt::CaseInsensitive) && dirContainsEfi(QDir(efiDir.filePath(entry)))) {
+            candidates << entry;
+        }
+    }
+    if (candidates.isEmpty()) {
+        return fallback;
+    }
+    // Prefer the expected fallback name if present; otherwise take the first match.
+    if (candidates.contains(fallback, Qt::CaseInsensitive)) {
+        for (const auto& c : candidates) {
+            if (c.compare(fallback, Qt::CaseInsensitive) == 0) {
+                return c;
+            }
+        }
+    }
+    return candidates.first();
 }
 
 bool grubSupportsForceExtraRemovable(Cmd* shell, const QString& helpCmd, Elevation elevate)
@@ -363,9 +380,7 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
             }
             emit log(QStringLiteral("$ uname -m"));
             const QString arch = detectArch(shell);
-            const QString release = mxReleaseFromRoot({});
-            const QString bootloaderId = release.isEmpty() ? QStringLiteral("MX")
-                                                           : QStringLiteral("MX%1").arg(release);
+            const QString bootloaderId = detectBootloaderId(QStringLiteral("/boot/efi"), {});
             const QString helpCmd = QStringLiteral("grub-install --help");
             const bool forceExtraRemovable = grubSupportsForceExtraRemovable(shell, helpCmd, Elevation::No);
             cmd = grubInstallCmd(QStringLiteral("grub-install"), arch, bootloaderId, forceExtraRemovable);
@@ -416,9 +431,7 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
         }
         emit log(QStringLiteral("$ uname -m"));
         const QString arch = detectArch(shell);
-        const QString release = mxReleaseFromRoot(tmpdir.path());
-        const QString bootloaderId = release.isEmpty() ? QStringLiteral("MX")
-                                                       : QStringLiteral("MX%1").arg(release);
+        const QString bootloaderId = detectBootloaderId(tmpdir.path() + "/boot/efi", tmpdir.path());
         const QString helpCmd = QStringLiteral("chroot %1 grub-install --help").arg(tmpdir.path());
         const bool forceExtraRemovable = grubSupportsForceExtraRemovable(shell, helpCmd, Elevation::Yes);
         cmd = grubInstallCmd(QStringLiteral("chroot %1 grub-install").arg(tmpdir.path()), arch, bootloaderId, forceExtraRemovable);
