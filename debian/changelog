@@ -1,6 +1,7 @@
-mx-bootrepair (26.02) mx; urgency=medium
+mx-bootrepair (26.02.1) mx; urgency=medium
 
   * Fix ESP device handling and /boot/efi mount restore
+  * Detect and reuse existing EFI bootloader ID
 
  -- Adrian <adrian@mxlinux.org>  Sat, 07 Feb 2026 10:17:19 -0500
 
