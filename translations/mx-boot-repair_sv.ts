@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sv">
 <context>
     <name>MainWindow</name>
     <message>
@@ -368,78 +366,79 @@ Are you sure?</source>
     <message>
         <location filename="../src/gui/main.cpp" line="94"/>
         <source>MX Boot Repair - GUI and CLI tool for repairing GRUB bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Boot Repair - GUI och Kommandolinjeverktyg för att reparera GRUB bootloader</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="99"/>
         <source>Force CLI mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Tvinga Kommandolinjeläge</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="100"/>
         <source>Print actions without executing</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv aktiviteter utan att utföra</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="101"/>
         <source>Do not prompt; require flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen prompt; kräver flaggor</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="102"/>
         <source>Action: install, repair, initramfs, backup, restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitet: installera, reparera, initramfs, backa upp, återställ</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="103"/>
         <source>Target for install: mbr, esp, root</source>
-        <translation type="unfinished"></translation>
+        <translation>Mål för installering: mbr, esp, root</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="104"/>
         <source>Device for target (e.g., sda, sda1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Enhet för mål (d.v.s., sda, sda1)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="105"/>
         <source>Root partition (e.g., /dev/sda2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Root partition (d.v.s., /dev/sda2)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="106"/>
         <source>Partition to mount at /boot in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partition att montera vid/boot i chroot</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="107"/>
         <source>Partition to mount at /boot/efi in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partition att montera vid /boot/efi i chroot</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="108"/>
         <source>Path for backup/restore image</source>
-        <translation type="unfinished"></translation>
+        <translation>Sökväg för backup/återställ bild</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="109"/>
         <source>Skip confirmations (for restore)</source>
-        <translation type="unfinished"></translation>
+        <translation>Slopa bekräftelser (för återställning)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="110"/>
         <source>Enable verbose output</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera verbose utdata</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="111"/>
         <source>Suppress non-error output</source>
-        <translation type="unfinished"></translation>
+        <translation>Undertryck icke felrelaterad utdata</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="121"/>
         <source>Error: --verbose and --quiet options are mutually exclusive
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Fel: --verbose och --quiet alternativen är ömsesidigt uteslutande
+</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="127"/>

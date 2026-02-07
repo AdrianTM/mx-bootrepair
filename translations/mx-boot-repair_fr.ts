@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -16,7 +14,7 @@
     <message>
         <location filename="../src/gui/mainwindow.ui" line="64"/>
         <source>What would you like to do?</source>
-        <translation>Que souhaitez-vous faire&#xa0;?</translation>
+        <translation>Que souhaitez-vous faire ?</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="94"/>
@@ -69,7 +67,7 @@
         <location filename="../src/gui/mainwindow.ui" line="193"/>
         <location filename="../src/gui/mainwindow.cpp" line="424"/>
         <source>Location:</source>
-        <translation>Emplacement&#xa0;:</translation>
+        <translation>Emplacement :</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="218"/>
@@ -96,13 +94,13 @@
         <location filename="../src/gui/mainwindow.ui" line="278"/>
         <location filename="../src/gui/mainwindow.cpp" line="431"/>
         <source>Select root location:</source>
-        <translation>Sélectionner l’emplacement de root&#xa0;:</translation>
+        <translation>Sélectionner l’emplacement de root :</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="300"/>
         <location filename="../src/gui/mainwindow.cpp" line="425"/>
         <source>Install on:</source>
-        <translation>Installer dans&#xa0;:</translation>
+        <translation>Installer dans :</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="389"/>
@@ -185,7 +183,7 @@
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="174"/>
         <source>Generating initramfs images on: %1</source>
-        <translation>Génération des images d’initramfs à&#xa0;: %1</translation>
+        <translation>Génération des images d’initramfs à : %1</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="203"/>
@@ -214,7 +212,7 @@
 Are you sure?</source>
         <translation>
 
-Êtes-vous sûr&#xa0;?</translation>
+Êtes-vous sûr ?</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="267"/>
@@ -229,7 +227,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="303"/>
         <source>Select %1 location:</source>
-        <translation>Sélectionner l’emplacement de %1&#xa0;:</translation>
+        <translation>Sélectionner l’emplacement de %1 :</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="326"/>
@@ -244,7 +242,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="342"/>
         <source>Process finished with success.&lt;p&gt;&lt;b&gt;Do you want to exit MX Boot Repair?&lt;/b&gt;</source>
-        <translation>Le processus s’est achevé avec succès. &lt;p&gt;&lt;b&gt; Voulez-vous quitter MX Réparation d’amorçage&#xa0;?&lt;/b&gt;</translation>
+        <translation>Le processus s’est achevé avec succès. &lt;p&gt;&lt;b&gt; Voulez-vous quitter MX Réparation d’amorçage ?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="348"/>
@@ -256,7 +254,7 @@ Are you sure?</source>
         <location filename="../src/gui/mainwindow.cpp" line="148"/>
         <location filename="../src/gui/mainwindow.cpp" line="180"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
-        <translation>Entrer le mot de passe pour déverrouiller la partition chiffrée %1&#xa0;:</translation>
+        <translation>Entrer le mot de passe pour déverrouiller la partition chiffrée %1 :</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="430"/>
@@ -314,7 +312,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="514"/>
         <source>Version: </source>
-        <translation>Version&#xa0;: </translation>
+        <translation>Version : </translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="515"/>
@@ -368,78 +366,79 @@ Are you sure?</source>
     <message>
         <location filename="../src/gui/main.cpp" line="94"/>
         <source>MX Boot Repair - GUI and CLI tool for repairing GRUB bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Réparateur d’amorçage (MX Boot Repair) - Outil GUI et CLI pour réparer le chargeur d’amorçage GRUB</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="99"/>
         <source>Force CLI mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer le mode CLI</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="100"/>
         <source>Print actions without executing</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimer les actions sans les exécuter</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="101"/>
         <source>Do not prompt; require flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas demander ; exiger des drapeaux</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="102"/>
         <source>Action: install, repair, initramfs, backup, restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Action : installer, réparer, initramfs, sauvegarder, restaurer</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="103"/>
         <source>Target for install: mbr, esp, root</source>
-        <translation type="unfinished"></translation>
+        <translation>Cible pour l’installation : mbr, esp, root</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="104"/>
         <source>Device for target (e.g., sda, sda1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Périphérique pour la cible (par exemple, sda, sda1)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="105"/>
         <source>Root partition (e.g., /dev/sda2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Partition root (par exemple, /dev/sda2)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="106"/>
         <source>Partition to mount at /boot in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partition à monter dans /boot dans chroot</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="107"/>
         <source>Partition to mount at /boot/efi in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partition à monter dans /boot/efi dans chroot</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="108"/>
         <source>Path for backup/restore image</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin d’accès à l’image de sauvegarde/restauration</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="109"/>
         <source>Skip confirmations (for restore)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer les confirmations (pour la restauration)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="110"/>
         <source>Enable verbose output</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer la sortie détaillée (verbose output)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="111"/>
         <source>Suppress non-error output</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer les sorties non liées à une erreur</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="121"/>
         <source>Error: --verbose and --quiet options are mutually exclusive
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur : les options --verbose et --quiet s’excluent mutuellement
+</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="127"/>
@@ -454,7 +453,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/cli/controller.cpp" line="29"/>
         <source>Invalid index. Try again: </source>
-        <translation>Index erroné. Réessayez&#xa0;: </translation>
+        <translation>Index erroné. Réessayez : </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="48"/>
@@ -499,17 +498,17 @@ Are you sure?</source>
     <message>
         <location filename="../src/cli/controller.cpp" line="241"/>
         <source>Select action [1-5 or &apos;q&apos; to quit]: </source>
-        <translation>Sélectionnez l’action [1 à 5 ou «&#xa0;q&#xa0;» pour quitter] &#xa0;: </translation>
+        <translation>Sélectionnez l’action [1 à 5 ou « q » pour quitter]  : </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="247"/>
         <source>Invalid selection. Enter 1-5 or &apos;q&apos; to quit.</source>
-        <translation>Sélection erronée. Entrez 1 à 5 ou «&#xa0;q&#xa0;» pour quitter.</translation>
+        <translation>Sélection erronée. Entrez 1 à 5 ou « q » pour quitter.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="252"/>
         <source>Target: 0) MBR  1) ESP  2) Root</source>
-        <translation>Cible&#xa0;: 0) MBR 1) ESP 2) Root</translation>
+        <translation>Cible : 0) MBR 1) ESP 2) Root</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="253"/>
@@ -563,7 +562,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/cli/controller.cpp" line="324"/>
         <source>Output file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
-        <translation>Chemin d’accès du fichier de sortie (ou soit «&#xa0;b&#xa0;» pour revenir en arrière, soit «&#xa0;q&#xa0;» pour quitter)&#xa0;: </translation>
+        <translation>Chemin d’accès du fichier de sortie (ou soit « b » pour revenir en arrière, soit « q » pour quitter) : </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="339"/>
@@ -573,17 +572,17 @@ Are you sure?</source>
     <message>
         <location filename="../src/cli/controller.cpp" line="342"/>
         <source>Input backup file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
-        <translation>Entrer le chemin d’accès du fichier de sauvegarde (ou soit «&#xa0;b&#xa0;» pour revenir en arrière, soit «&#xa0;q&#xa0;» pour quitter)&#xa0;: </translation>
+        <translation>Entrer le chemin d’accès du fichier de sauvegarde (ou soit « b » pour revenir en arrière, soit « q » pour quitter) : </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="349"/>
         <source>WARNING: This will overwrite the first 446 bytes of /dev/</source>
-        <translation>AVERTISSEMENT&#xa0;: cela écrasera les 446 premiers octets de /dev/</translation>
+        <translation>AVERTISSEMENT : cela écrasera les 446 premiers octets de /dev/</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="349"/>
         <source>. Continue? [y/N]: </source>
-        <translation>. Continuer&#xa0;? [o/N]&#xa0;: </translation>
+        <translation>. Continuer ? [o/N] : </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="352"/>

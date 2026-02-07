@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_BE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr_BE">
 <context>
     <name>MainWindow</name>
     <message>
@@ -112,7 +110,7 @@
     <message>
         <location filename="../src/gui/mainwindow.ui" line="392"/>
         <source>About...</source>
-        <translation>À propos&#xa0;…</translation>
+        <translation>À propos …</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="440"/>
@@ -368,78 +366,79 @@ Are you sure?</source>
     <message>
         <location filename="../src/gui/main.cpp" line="94"/>
         <source>MX Boot Repair - GUI and CLI tool for repairing GRUB bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Réparateur d’amorçage (MX Boot Repair) - Outil GUI et CLI pour réparer le chargeur d’amorçage GRUB</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="99"/>
         <source>Force CLI mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer le mode CLI</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="100"/>
         <source>Print actions without executing</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimer les actions sans les exécuter</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="101"/>
         <source>Do not prompt; require flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas demander; exiger des drapeaux</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="102"/>
         <source>Action: install, repair, initramfs, backup, restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Action: installer, réparer, initramfs, sauvegarder, restaurer</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="103"/>
         <source>Target for install: mbr, esp, root</source>
-        <translation type="unfinished"></translation>
+        <translation>Cible pour l’installation: mbr, esp, root</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="104"/>
         <source>Device for target (e.g., sda, sda1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Périphérique pour la cible (par exemple, sda, sda1)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="105"/>
         <source>Root partition (e.g., /dev/sda2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Partition root (par exemple, /dev/sda2)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="106"/>
         <source>Partition to mount at /boot in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partition à monter dans /boot dans chroot</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="107"/>
         <source>Partition to mount at /boot/efi in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partition à monter dans /boot/efi dans chroot</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="108"/>
         <source>Path for backup/restore image</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin d’accès à l’image de sauvegarde/restauration</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="109"/>
         <source>Skip confirmations (for restore)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer les confirmations (pour la restauration)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="110"/>
         <source>Enable verbose output</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer la sortie détaillée (verbose output)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="111"/>
         <source>Suppress non-error output</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer les sorties non liées à une erreur</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="121"/>
         <source>Error: --verbose and --quiet options are mutually exclusive
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur: les options --verbose et --quiet s’excluent mutuellement
+</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="127"/>
@@ -499,12 +498,12 @@ Are you sure?</source>
     <message>
         <location filename="../src/cli/controller.cpp" line="241"/>
         <source>Select action [1-5 or &apos;q&apos; to quit]: </source>
-        <translation>Sélectionnez l’action [1 à 5 ou «&#xa0;q&#xa0;» pour quitter]: </translation>
+        <translation>Sélectionnez l’action [1 à 5 ou « q » pour quitter]: </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="247"/>
         <source>Invalid selection. Enter 1-5 or &apos;q&apos; to quit.</source>
-        <translation>Sélection erronée. Entrez 1 à 5 ou «&#xa0;q&#xa0;» pour quitter.</translation>
+        <translation>Sélection erronée. Entrez 1 à 5 ou « q » pour quitter.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="252"/>
@@ -563,7 +562,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/cli/controller.cpp" line="324"/>
         <source>Output file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
-        <translation>Chemin d’accès du fichier de sortie (ou soit «&#xa0;b&#xa0;» pour revenir en arrière, soit «&#xa0;q&#xa0;» pour quitter): </translation>
+        <translation>Chemin d’accès du fichier de sortie (ou soit « b » pour revenir en arrière, soit « q » pour quitter): </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="339"/>
@@ -573,7 +572,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/cli/controller.cpp" line="342"/>
         <source>Input backup file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
-        <translation>Entrer le chemin d’accès du fichier de sauvegarde (ou soit «&#xa0;b&#xa0;» pour revenir en arrière, soit «&#xa0;q&#xa0;» pour quitter): </translation>
+        <translation>Entrer le chemin d’accès du fichier de sauvegarde (ou soit « b » pour revenir en arrière, soit « q » pour quitter): </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="349"/>

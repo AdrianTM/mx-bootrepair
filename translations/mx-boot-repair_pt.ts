@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt">
 <context>
     <name>MainWindow</name>
     <message>
@@ -368,78 +366,79 @@ Seguramente?</translation>
     <message>
         <location filename="../src/gui/main.cpp" line="94"/>
         <source>MX Boot Repair - GUI and CLI tool for repairing GRUB bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Boot Repair - programa por interface gráfica e por interface de linha de comandos para reparar o bootloader GRUB</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="99"/>
         <source>Force CLI mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Forçar o Modo por Linha de Comandos</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="100"/>
         <source>Print actions without executing</source>
-        <translation type="unfinished"></translation>
+        <translation>Exibir as ações sem executá-las</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="101"/>
         <source>Do not prompt; require flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Não solicitar, somente requerer as flags</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="102"/>
         <source>Action: install, repair, initramfs, backup, restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ação: instalar, reparar, cópia de segurança, restaurar, initramfs</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="103"/>
         <source>Target for install: mbr, esp, root</source>
-        <translation type="unfinished"></translation>
+        <translation>Alvo da instalação: MBR, ESP, Root</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="104"/>
         <source>Device for target (e.g., sda, sda1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Destino da instalação (ex: sda, sda1)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="105"/>
         <source>Root partition (e.g., /dev/sda2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Partição de ‘root’ (raiz), por ex.  /dev/sda2</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="106"/>
         <source>Partition to mount at /boot in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partição para montar em /boot no chroot</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="107"/>
         <source>Partition to mount at /boot/efi in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partição para montar em /boot/efi do chroot</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="108"/>
         <source>Path for backup/restore image</source>
-        <translation type="unfinished"></translation>
+        <translation>Caminho da cópia de segurança ou restauro da imagem</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="109"/>
         <source>Skip confirmations (for restore)</source>
-        <translation type="unfinished"></translation>
+        <translation>Não fazer perguntas de confirmação (no restauro)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="110"/>
         <source>Enable verbose output</source>
-        <translation type="unfinished"></translation>
+        <translation>Ativar output detalhado</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="111"/>
         <source>Suppress non-error output</source>
-        <translation type="unfinished"></translation>
+        <translation>Não exibir nada quando não ocorrerem erros</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="121"/>
         <source>Error: --verbose and --quiet options are mutually exclusive
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Erro: As opções ‘--verbose’ e ‘--quiet’ não podem ser utilizadas ao mesmo tempo
+</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="127"/>
@@ -454,136 +453,136 @@ Seguramente?</translation>
     <message>
         <location filename="../src/cli/controller.cpp" line="29"/>
         <source>Invalid index. Try again: </source>
-        <translation type="unfinished"></translation>
+        <translation>O índice inválido. Tente novamente: </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="48"/>
         <source>Invalid selection. Enter a number </source>
-        <translation type="unfinished"></translation>
+        <translation>A seleção inválida. Insira um número</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="234"/>
         <source>MX Boot Repair (CLI)</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Boot Repair (CLI)</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="235"/>
         <source>1) Install GRUB</source>
-        <translation type="unfinished"></translation>
+        <translation>1) Instalar o GRUB</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="236"/>
         <source>2) Repair GRUB (update-grub)</source>
-        <translation type="unfinished"></translation>
+        <translation>2) Reparar o GRUB (update-grub)</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="237"/>
         <source>3) Regenerate initramfs</source>
-        <translation type="unfinished"></translation>
+        <translation>3) Regenerar o initramfs</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="238"/>
         <source>4) Backup MBR/PBR</source>
-        <translation type="unfinished"></translation>
+        <translation>4) Fazer a cópia de segurança do MBR ou do PBR</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="239"/>
         <source>5) Restore MBR/PBR</source>
-        <translation type="unfinished"></translation>
+        <translation>5) Restaurar o MBR ou o PBR</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="240"/>
         <source>q) Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>q) Sair</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="241"/>
         <source>Select action [1-5 or &apos;q&apos; to quit]: </source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione a ação [1 a 5 ou ‘q’ para sair}: </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="247"/>
         <source>Invalid selection. Enter 1-5 or &apos;q&apos; to quit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleção inválida. Pressione 1 a 5 ou ‘q’ para sair.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="252"/>
         <source>Target: 0) MBR  1) ESP  2) Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Alvot: 0) MBR  1) ESP  2) Root</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="253"/>
         <source>Select target</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha o alvo</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="259"/>
         <location filename="../src/cli/controller.cpp" line="294"/>
         <location filename="../src/cli/controller.cpp" line="307"/>
         <source>No partitions found. Returning to main menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhuma partição foi encontrada. A voltar ao menu principal.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="263"/>
         <location filename="../src/cli/controller.cpp" line="320"/>
         <location filename="../src/cli/controller.cpp" line="338"/>
         <source>No disks found. Returning to main menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum disco foi encontrado. A voltar para o menu principal.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="268"/>
         <source>Select disk for MBR (e.g., sda)</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione o disco para o MBR (ex: sda)</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="272"/>
         <source>Select partition for GRUB (e.g., sda1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione a partição para o GRUB (ex; sda1)</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="277"/>
         <source>Select root partition of installed system</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha a partição root do sistema instalado</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="295"/>
         <source>Select root partition to repair</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha a partição root a reparar</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="308"/>
         <source>Select root partition to regenerate initramfs</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha a partição root a regenerar o initramfs</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="321"/>
         <source>Select disk to back up MBR/PBR from</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione o disco para onde fazer a cópia de segurança do MBR ou do PBR</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="324"/>
         <source>Output file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
-        <translation type="unfinished"></translation>
+        <translation>Insira o caminho do ficheiro de saída (ou pressione ‘b’ para voltar ou ‘q’ para sair): </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="339"/>
         <source>Select disk to restore MBR/PBR to</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione o disco para onde restaurar o MBR ou o PBR</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="342"/>
         <source>Input backup file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
-        <translation type="unfinished"></translation>
+        <translation>Indique o caminho para a cópia de segurança (ou ‘b’ para voltar, ‘q’ para sair): </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="349"/>
         <source>WARNING: This will overwrite the first 446 bytes of /dev/</source>
-        <translation type="unfinished"></translation>
+        <translation>AVISO: Isto irá substituir os primeiros 446 bytes de /dev/</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="349"/>
         <source>. Continue? [y/N]: </source>
-        <translation type="unfinished"></translation>
+        <translation>. Você quer continuar? [s/N]: </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="352"/>
@@ -600,12 +599,12 @@ Seguramente?</translation>
     <message>
         <location filename="../src/cli/controller.cpp" line="357"/>
         <source>Cancelled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelado.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="364"/>
         <source>Unknown selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha desconhecida</translation>
     </message>
 </context>
 </TS>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt_BR">
 <context>
     <name>MainWindow</name>
     <message>
@@ -11,7 +9,7 @@
     <message>
         <location filename="../src/gui/mainwindow.ui" line="45"/>
         <source>MX Boot Repair is a utility that can be used to reinstall GRUB bootloader on the ESP (EFI System Partition), MBR (Master Boot Record) or root partition. It provides the option to reconstruct the GRUB configuration file and to back up and restore MBR or PBR (root).</source>
-        <translation>O Reparador de Inicialização do MX (MX Boot Repair) é um utilitário que pode ser utilizado para reinstalar ou reparar o gerenciador/carregador de inicialização GRUB (GRand Unified Bootloader) na ESP (EFI System Partition), no MBR (Master Boot Record) ou na partição raiz ( /, root). O reparador fornece as opções de reconstruir o arquivo de configurações do GRUB, fazer cópia de segurança e restaurar o MBR ou o PBR (root).</translation>
+        <translation>O Reparador de Inicialização do MX (MX Boot Repair) é um utilitário que pode ser utilizado para reinstalar ou reparar o gerenciador/carregador de inicialização GRUB (GRand Unified Bootloader) na ESP (EFI System Partition), no MBR (Master Boot Record) ou na partição raiz ( / ou root). O reparador fornece as opções de reconstruir o arquivo de configurações do GRUB, fazer cópia de segurança e restaurar o MBR ou o PBR (root).</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="64"/>
@@ -96,7 +94,7 @@
         <location filename="../src/gui/mainwindow.ui" line="278"/>
         <location filename="../src/gui/mainwindow.cpp" line="431"/>
         <source>Select root location:</source>
-        <translation>Selecionar o local da raiz ( /, root):</translation>
+        <translation>Selecionar o local da raiz ( / ou root):</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="300"/>
@@ -368,78 +366,78 @@ Você tem certeza?</translation>
     <message>
         <location filename="../src/gui/main.cpp" line="94"/>
         <source>MX Boot Repair - GUI and CLI tool for repairing GRUB bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>O ‘MX Boot Repair’ é um programa por interface gráfica e por interface de linha de comandos que permite reparar ou reinstalar o gerenciador/carregador de inicialização GRUB (GRand Unified Bootloader)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="99"/>
         <source>Force CLI mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Forçar o Modo por Linha de Comandos</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="100"/>
         <source>Print actions without executing</source>
-        <translation type="unfinished"></translation>
+        <translation>Exibir as ações sem executá-las</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="101"/>
         <source>Do not prompt; require flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Não solicitar, somente requerer os sinalizadores</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="102"/>
         <source>Action: install, repair, initramfs, backup, restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ação: instalar, reparar, fazer uma cópia de segurança, restaurar o arquivo ‘initramfs’</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="103"/>
         <source>Target for install: mbr, esp, root</source>
-        <translation type="unfinished"></translation>
+        <translation>O objetivo da instalação é MBR, ESP, Root</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="104"/>
         <source>Device for target (e.g., sda, sda1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Destino da instalação, por exemplo, sda, sda1, sda2, sdb, sdb1, etc.</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="105"/>
         <source>Root partition (e.g., /dev/sda2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Partição de ‘root’ (raiz ou /), por exemplo, sda, sda1, sda2, sdb, sdb1, etc.</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="106"/>
         <source>Partition to mount at /boot in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partição para montar no ‘/boot’ do ‘chroot’</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="107"/>
         <source>Partition to mount at /boot/efi in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>Partição para montar no ‘/boot/efi’ do ‘chroot’</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="108"/>
         <source>Path for backup/restore image</source>
-        <translation type="unfinished"></translation>
+        <translation>Caminho da cópia de segurança ou da restauração da imagem</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="109"/>
         <source>Skip confirmations (for restore)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pular as perguntas de confirmações da restauração</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="110"/>
         <source>Enable verbose output</source>
-        <translation type="unfinished"></translation>
+        <translation>Ativar a exibição das informações detalhadas</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="111"/>
         <source>Suppress non-error output</source>
-        <translation type="unfinished"></translation>
+        <translation>Não exibir as informações quando não ocorrer erros ou falhas</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="121"/>
         <source>Error: --verbose and --quiet options are mutually exclusive
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um erro: As opções ‘--verbose’ e ‘--quiet’ não podem ser utilizadas ao mesmo tempo</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="127"/>
