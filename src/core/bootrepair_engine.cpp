@@ -339,7 +339,28 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
     // If installing on current root
     if (isMountedTo(root, "/")) {
         QString cmd = QStringLiteral("grub-install --target=i386-pc --recheck --force /dev/%1").arg(opt.location);
+        QString prevEsp; // track original ESP mount so we can restore it
         if (opt.target == GrubTarget::Esp) {
+            execRunAsRoot("test -d /boot/efi || mkdir /boot/efi", nullptr, nullptr, true);
+            if (!opt.espDevice.isEmpty() && !isMountedTo(opt.espDevice, "/boot/efi")) {
+                shell->getCmdOut("findmnt -n -o SOURCE /boot/efi", QuietMode::Yes).trimmed().swap(prevEsp);
+                if (!execRunAsRoot("mountpoint -q /boot/efi && umount /boot/efi", nullptr, nullptr, true)) {
+                    emit log(QStringLiteral("Failed to unmount /boot/efi (device may be busy)"));
+                    emit finished(false);
+                    currentDryRun_ = false;
+                    return false;
+                }
+                if (!execRunAsRoot("mount " + opt.espDevice + " /boot/efi", nullptr, nullptr, true)) {
+                    emit log(QStringLiteral("Failed to mount %1 on /boot/efi").arg(opt.espDevice));
+                    if (!prevEsp.isEmpty()
+                        && !execRunAsRoot("mount " + prevEsp + " /boot/efi", nullptr, nullptr, true)) {
+                        emit log(QStringLiteral("Warning: could not restore %1 on /boot/efi; please remount manually").arg(prevEsp));
+                    }
+                    emit finished(false);
+                    currentDryRun_ = false;
+                    return false;
+                }
+            }
             emit log(QStringLiteral("$ uname -m"));
             const QString arch = detectArch(shell);
             const QString release = mxReleaseFromRoot({});
@@ -349,10 +370,13 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
             const bool forceExtraRemovable = grubSupportsForceExtraRemovable(shell, helpCmd, Elevation::No);
             cmd = grubInstallCmd(QStringLiteral("grub-install"), arch, bootloaderId, forceExtraRemovable);
         }
-        const bool ok = (opt.target == GrubTarget::Esp)
-                             ? execRunAsRoot("test -d /boot/efi || mkdir /boot/efi", nullptr, nullptr, true) &&
-                                   execRunAsRoot(cmd, nullptr, nullptr, true)
-                             : execRunAsRoot(cmd, nullptr, nullptr, true);
+        const bool ok = execRunAsRoot(cmd, nullptr, nullptr, true);
+        if (!prevEsp.isEmpty()) {
+            if (!execRunAsRoot("umount /boot/efi", nullptr, nullptr, true)
+                || !execRunAsRoot("mount " + prevEsp + " /boot/efi", nullptr, nullptr, true)) {
+                emit log(QStringLiteral("Warning: could not restore %1 on /boot/efi; please remount manually").arg(prevEsp));
+            }
+        }
         emit finished(ok);
         currentDryRun_ = false;
         return ok;
