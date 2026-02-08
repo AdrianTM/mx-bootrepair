@@ -60,16 +60,17 @@ QString detectBootloaderId(const QString& efiMountPath, const QString& rootPath)
 {
     const QString fallback = isArchBuild(rootPath) ? QStringLiteral("MXarch") : QStringLiteral("MX");
 
-    // Look for existing MX* directories on the ESP that contain a GRUB binary.
+    // Look for existing MX*/antiX* directories on the ESP that contain a GRUB binary.
     const QDir efiDir(efiMountPath + "/EFI");
     if (!efiDir.exists()) {
         return fallback;
     }
-    // Collect all MX* candidates that have .efi files.
+    // Collect all MX*/antiX* candidates that have .efi files.
     QStringList candidates;
     const QStringList entries = efiDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
     for (const auto& entry : entries) {
-        if (entry.startsWith("MX", Qt::CaseInsensitive) && dirContainsEfi(QDir(efiDir.filePath(entry)))) {
+        if ((entry.startsWith("MX", Qt::CaseInsensitive) || entry.startsWith("antiX", Qt::CaseInsensitive))
+            && dirContainsEfi(QDir(efiDir.filePath(entry)))) {
             candidates << entry;
         }
     }
