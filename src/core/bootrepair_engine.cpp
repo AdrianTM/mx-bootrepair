@@ -255,6 +255,13 @@ static inline QString normalizeDev(const QString& device)
     return device.startsWith("/dev/") ? device : ("/dev/" + device);
 }
 
+QString BootRepairEngine::mountSource(const QString& mountpoint) const
+{
+    QString output;
+    shell->proc("findmnt", {"-n", "-o", "SOURCE", "--target", mountpoint}, &output, nullptr, QuietMode::Yes);
+    return output.trimmed();
+}
+
 bool BootRepairEngine::isEspPartition(const QString& device) const
 {
     const QString dev = normalizeDev(device);

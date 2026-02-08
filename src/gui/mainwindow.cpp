@@ -51,8 +51,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     setWindowFlags(Qt::Window); // for the close, min and max buttons
     refresh();
-    addDevToList();
+    if (isUefi()) {
+        ui->radioGrubEsp->setChecked(true);
+        ui->radioGrubMbr->setChecked(false);
+    }
     ui->radioGrubEsp->setDisabled(!isUefi());
+    addDevToList();
+    guessPartition();
 }
 
 MainWindow::~MainWindow()
@@ -293,6 +298,18 @@ void MainWindow::setEspDefaults()
                               tr("Could not find EFI system partition (ESP) "
                                  "on any system disks. Please create an ESP and try again."));
         ui->buttonApply->setDisabled(true);
+        return;
+    }
+    // Pre-select the ESP currently mounted at /boot/efi
+    const QString mountedEsp = engine->mountSource("/boot/efi");
+    if (!mountedEsp.isEmpty()) {
+        const QString devName = mountedEsp.startsWith("/dev/") ? mountedEsp.mid(5) : mountedEsp;
+        for (int i = 0; i < ui->comboLocation->count(); ++i) {
+            if (ui->comboLocation->itemText(i).section(' ', 0, 0) == devName) {
+                ui->comboLocation->setCurrentIndex(i);
+                break;
+            }
+        }
     }
 }
 

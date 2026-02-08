@@ -32,6 +32,7 @@ public:
     bool isMounted(const QString& volume, const QString& mount) const; // public wrapper
     bool isLuks(const QString& device) const;                          // /dev/...
     bool isEspPartition(const QString& device) const;                  // sda1 or /dev/sda1
+    QString mountSource(const QString& mountpoint) const;              // findmnt SOURCE
     bool isLinuxPartitionType(const QString& device) const;            // sdaX or /dev/sdaX
     bool labelContains(const QString& device, const QString& needle) const; // sdaX or /dev/sdaX
 
