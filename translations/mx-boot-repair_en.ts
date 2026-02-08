@@ -45,7 +45,7 @@
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="134"/>
-        <location filename="../src/gui/mainwindow.cpp" line="442"/>
+        <location filename="../src/gui/mainwindow.cpp" line="441"/>
         <source>Select Boot Method</source>
         <translation type="unfinished"></translation>
     </message>
@@ -67,7 +67,7 @@
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="193"/>
-        <location filename="../src/gui/mainwindow.cpp" line="443"/>
+        <location filename="../src/gui/mainwindow.cpp" line="442"/>
         <source>Location:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -88,19 +88,19 @@
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="243"/>
-        <location filename="../src/gui/mainwindow.cpp" line="445"/>
+        <location filename="../src/gui/mainwindow.cpp" line="444"/>
         <source>root</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="278"/>
-        <location filename="../src/gui/mainwindow.cpp" line="450"/>
+        <location filename="../src/gui/mainwindow.cpp" line="449"/>
         <source>Select root location:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="300"/>
-        <location filename="../src/gui/mainwindow.cpp" line="444"/>
+        <location filename="../src/gui/mainwindow.cpp" line="443"/>
         <source>Install on:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -156,7 +156,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="478"/>
+        <location filename="../src/gui/mainwindow.cpp" line="477"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
@@ -166,171 +166,171 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="297"/>
-        <location filename="../src/gui/mainwindow.cpp" line="367"/>
-        <location filename="../src/gui/mainwindow.cpp" line="483"/>
-        <location filename="../src/gui/mainwindow.cpp" line="487"/>
-        <location filename="../src/gui/mainwindow.cpp" line="494"/>
-        <location filename="../src/gui/mainwindow.cpp" line="500"/>
-        <location filename="../src/gui/mainwindow.cpp" line="508"/>
-        <location filename="../src/gui/mainwindow.cpp" line="515"/>
+        <location filename="../src/gui/mainwindow.cpp" line="296"/>
+        <location filename="../src/gui/mainwindow.cpp" line="366"/>
+        <location filename="../src/gui/mainwindow.cpp" line="482"/>
+        <location filename="../src/gui/mainwindow.cpp" line="486"/>
+        <location filename="../src/gui/mainwindow.cpp" line="493"/>
+        <location filename="../src/gui/mainwindow.cpp" line="499"/>
+        <location filename="../src/gui/mainwindow.cpp" line="507"/>
+        <location filename="../src/gui/mainwindow.cpp" line="514"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="147"/>
+        <location filename="../src/gui/mainwindow.cpp" line="146"/>
         <source>The GRUB configuration file (grub.cfg) is being rebuilt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="181"/>
+        <location filename="../src/gui/mainwindow.cpp" line="180"/>
         <source>Generating initramfs images on: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="210"/>
+        <location filename="../src/gui/mainwindow.cpp" line="209"/>
         <source>Backing up MBR or PBR from %1 device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="266"/>
+        <location filename="../src/gui/mainwindow.cpp" line="265"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="267"/>
+        <location filename="../src/gui/mainwindow.cpp" line="266"/>
         <source>You are going to write the content of </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="267"/>
+        <location filename="../src/gui/mainwindow.cpp" line="266"/>
         <source> to </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="268"/>
+        <location filename="../src/gui/mainwindow.cpp" line="267"/>
         <source>
 
 Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="274"/>
+        <location filename="../src/gui/mainwindow.cpp" line="273"/>
         <source>Restoring MBR/PBR from backup to %1 device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="298"/>
+        <location filename="../src/gui/mainwindow.cpp" line="297"/>
         <source>Could not find EFI system partition (ESP) on any system disks. Please create an ESP and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="322"/>
+        <location filename="../src/gui/mainwindow.cpp" line="321"/>
         <source>Select %1 location:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="345"/>
+        <location filename="../src/gui/mainwindow.cpp" line="344"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="361"/>
+        <location filename="../src/gui/mainwindow.cpp" line="360"/>
         <source>Success</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="361"/>
+        <location filename="../src/gui/mainwindow.cpp" line="360"/>
         <source>Process finished with success.&lt;p&gt;&lt;b&gt;Do you want to exit MX Boot Repair?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="367"/>
+        <location filename="../src/gui/mainwindow.cpp" line="366"/>
         <source>Process finished. Errors have occurred.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="114"/>
-        <location filename="../src/gui/mainwindow.cpp" line="155"/>
-        <location filename="../src/gui/mainwindow.cpp" line="187"/>
+        <location filename="../src/gui/mainwindow.cpp" line="154"/>
+        <location filename="../src/gui/mainwindow.cpp" line="186"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="449"/>
+        <location filename="../src/gui/mainwindow.cpp" line="448"/>
         <source>Select GRUB location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="458"/>
+        <location filename="../src/gui/mainwindow.cpp" line="457"/>
         <source>Select initramfs options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="468"/>
+        <location filename="../src/gui/mainwindow.cpp" line="467"/>
         <source>Select Item to Back Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="473"/>
+        <location filename="../src/gui/mainwindow.cpp" line="472"/>
         <source>Select Item to Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="483"/>
-        <location filename="../src/gui/mainwindow.cpp" line="494"/>
+        <location filename="../src/gui/mainwindow.cpp" line="482"/>
+        <location filename="../src/gui/mainwindow.cpp" line="493"/>
         <source>No location was selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="488"/>
-        <location filename="../src/gui/mainwindow.cpp" line="501"/>
+        <location filename="../src/gui/mainwindow.cpp" line="487"/>
+        <location filename="../src/gui/mainwindow.cpp" line="500"/>
         <source>Please select the root partition of the system you want to fix.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="506"/>
+        <location filename="../src/gui/mainwindow.cpp" line="505"/>
         <source>Select backup file name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="508"/>
-        <location filename="../src/gui/mainwindow.cpp" line="515"/>
+        <location filename="../src/gui/mainwindow.cpp" line="507"/>
+        <location filename="../src/gui/mainwindow.cpp" line="514"/>
         <source>No file was selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="513"/>
+        <location filename="../src/gui/mainwindow.cpp" line="512"/>
         <source>Select MBR or PBR backup file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="531"/>
+        <location filename="../src/gui/mainwindow.cpp" line="530"/>
         <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="533"/>
+        <location filename="../src/gui/mainwindow.cpp" line="532"/>
         <source>Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="534"/>
+        <location filename="../src/gui/mainwindow.cpp" line="533"/>
         <source>Simple boot repair program for MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="536"/>
+        <location filename="../src/gui/mainwindow.cpp" line="535"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="537"/>
+        <location filename="../src/gui/mainwindow.cpp" line="536"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="550"/>
+        <location filename="../src/gui/mainwindow.cpp" line="549"/>
         <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
