@@ -311,7 +311,7 @@ bool BootRepairEngine::mountChrootEnv(const QString& path)
         "(! test -d %2/sys || /bin/mount --rbind --make-rslave /sys %2/sys) && "
         "(! test -d %2/proc || /bin/mount --rbind /proc %2/proc) && "
         "(! test -d %2/run || /bin/mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs %2/run && "
-        "/bin/mkdir %2/run/udev && /bin/mount --rbind /run/udev %2/run/udev)").arg(path, tmpdir.path());
+        "(! test -d /run/udev || /bin/mkdir %2/run/udev && /bin/mount --rbind /run/udev %2/run/udev))").arg(path, tmpdir.path());
     return execRunAsRoot(cmd, nullptr, nullptr, true);
 }
 
