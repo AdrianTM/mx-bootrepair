@@ -310,8 +310,8 @@ bool BootRepairEngine::mountChrootEnv(const QString& path)
         "/bin/mount %1 %2 && /bin/mount --rbind --make-rslave /dev %2/dev && "
         "(! test -d %2/sys || /bin/mount --rbind --make-rslave /sys %2/sys) && "
         "(! test -d %2/proc || /bin/mount --rbind /proc %2/proc) && "
-        "/bin/mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs %2/run && /bin/mkdir %2/run/udev && "
-        "/bin/mount --rbind /run/udev %2/run/udev").arg(path, tmpdir.path());
+        "(! test -d %2/run || /bin/mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs %2/run && "
+        "/bin/mkdir %2/run/udev && /bin/mount --rbind /run/udev %2/run/udev)").arg(path, tmpdir.path());
     return execRunAsRoot(cmd, nullptr, nullptr, true);
 }
 
@@ -321,7 +321,7 @@ void BootRepairEngine::cleanupMounts(const QString& path, const QString& luks)
         execRunAsRoot("mountpoint -q " + path + "/boot/efi && umount " + path + "/boot/efi", nullptr, nullptr, true);
         execRunAsRoot("mountpoint -q " + path + "/boot && umount -R " + path + "/boot", nullptr, nullptr, true);
         const QString cmd = QStringLiteral(
-                                 "mountpoint -q %1 && /bin/umount -R %1/run && "
+                                 "mountpoint -q %1 && (! mountpoint -q %1/run || /bin/umount -R %1/run) && "
                                  "(! mountpoint -q %1/proc || /bin/umount -R %1/proc) && "
                                  "(! mountpoint -q %1/sys || /bin/umount -R %1/sys) && "
                                  "/bin/umount -R %1/dev && umount %1 && rmdir %1")
