@@ -1,8 +1,8 @@
-mx-bootrepair (26.02.5) mx; urgency=medium
+mx-bootrepair (26.02.6) mx; urgency=medium
 
   * Improve UEFI target defaults and ESP detection
   * Avoid /boot prompt when /boot is on root
-  * Handle missing /sys and /proc in chroot mount helpers
+  * Handle missing /sys, /proc, /run in chroot mount helpers
 
  -- Adrian <adrian@mxlinux.org>  Sat, 07 Feb 2026 22:36:03 -0500
 
