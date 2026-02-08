@@ -120,8 +120,7 @@ void MainWindow::installGRUB()
             }
             opt.luksPassword = pass;
         }
-        const QString bootDev = engine->resolveFstabDevice(opt.root, "/boot", opt.luksPassword);
-        opt.bootDevice = !bootDev.isEmpty() ? bootDev : selectPartFromList("/boot");
+        opt.bootDevice = engine->resolveFstabDevice(opt.root, "/boot", opt.luksPassword);
         if (opt.target == GrubTarget::Esp) {
             const QString espDev = engine->resolveFstabDevice(opt.root, "/boot/efi", opt.luksPassword);
             opt.espDevice = !espDev.isEmpty() ? espDev : "/dev/" + opt.location;
