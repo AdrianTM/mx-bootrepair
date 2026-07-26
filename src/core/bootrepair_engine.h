@@ -75,6 +75,7 @@ private:
     bool openLuks(const QString& part, const QString& mapper, const QByteArray& pass);
     bool mountChrootEnv(const QString& path);
     void cleanupMounts(const QString& path, const QString& luks);
+    void closeLuksMapper(const QString& mapper); // no-op if mapper is empty
     bool ensureMountFor(const QString& path, const QString& mountpoint, const QString& device);
     bool copyGrubLocales(const QString& rootPath = {});
 

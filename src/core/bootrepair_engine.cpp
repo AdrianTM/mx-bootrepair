@@ -534,6 +534,13 @@ void BootRepairEngine::cleanupMounts(const QString& path, const QString& luks)
     }
 }
 
+void BootRepairEngine::closeLuksMapper(const QString& mapper)
+{
+    if (!mapper.isEmpty()) {
+        execProcAsRoot("cryptsetup", {"luksClose", mapper}, nullptr, nullptr, true);
+    }
+}
+
 bool BootRepairEngine::ensureMountFor(const QString& path, const QString& mountpoint, const QString& device)
 {
     const QString target = path + mountpoint;
@@ -611,6 +618,7 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
     // If installing on current root
     const MountState rootState = isMountedTo(root, "/");
     if (rootState == MountState::QueryFailed) {
+        closeLuksMapper(mapper);
         emit log(QStringLiteral("Could not determine whether %1 is mounted; aborting.").arg(root));
         emit finished(false);
         currentDryRun_ = false;
@@ -843,6 +851,7 @@ bool BootRepairEngine::repairGrub(const BootRepairOptions& opt)
 
     const MountState rootState = isMountedTo(root, "/");
     if (rootState == MountState::QueryFailed) {
+        closeLuksMapper(mapper);
         emit log(QStringLiteral("Could not determine whether %1 is mounted; aborting.").arg(root));
         emit finished(false);
         currentDryRun_ = false;
@@ -928,6 +937,7 @@ bool BootRepairEngine::regenerateInitramfs(const BootRepairOptions& opt)
 
     const MountState rootState = isMountedTo(root, "/");
     if (rootState == MountState::QueryFailed) {
+        closeLuksMapper(mapper);
         emit log(QStringLiteral("Could not determine whether %1 is mounted; aborting.").arg(root));
         emit finished(false);
         currentDryRun_ = false;
