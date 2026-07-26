@@ -433,19 +433,11 @@ static QString unescapeLsblkHex(const QString& value)
     return result;
 }
 
-// This aggregate is used for single partitions. Whole-disk type checks use dedicated
-// multi-row queries so any matching child partition is detected.
-PartitionInfo BootRepairEngine::partitionInfo(const QString& device) const
+PartitionInfo BootRepairEngine::parsePartitionInfo(const QString& lsblkPairsOutput)
 {
-    const QString dev = normalizeDev(device);
-    emit const_cast<BootRepairEngine*>(this)->log(
-        QStringLiteral("$ lsblk -n -P -o PARTTYPE,FSTYPE,LABEL %1").arg(dev));
-    QString output;
-    shell->proc("lsblk", {"-n", "-P", "-o", "PARTTYPE,FSTYPE,LABEL", dev}, &output, nullptr, QuietMode::Yes);
-
     PartitionInfo info;
     static const QRegularExpression rx(QStringLiteral(R"re((\w+)="([^"]*)")re"));
-    auto it = rx.globalMatch(output);
+    auto it = rx.globalMatch(lsblkPairsOutput);
     while (it.hasNext()) {
         const auto match = it.next();
         const QString key = match.captured(1);
@@ -459,6 +451,18 @@ PartitionInfo BootRepairEngine::partitionInfo(const QString& device) const
         }
     }
     return info;
+}
+
+// This aggregate is used for single partitions. Whole-disk type checks use dedicated
+// multi-row queries so any matching child partition is detected.
+PartitionInfo BootRepairEngine::partitionInfo(const QString& device) const
+{
+    const QString dev = normalizeDev(device);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -n -P -o PARTTYPE,FSTYPE,LABEL %1").arg(dev));
+    QString output;
+    shell->proc("lsblk", {"-n", "-P", "-o", "PARTTYPE,FSTYPE,LABEL", dev}, &output, nullptr, QuietMode::Yes);
+    return parsePartitionInfo(output);
 }
 
 bool BootRepairEngine::isEspPartition(const QString& device) const

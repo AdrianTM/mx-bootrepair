@@ -48,6 +48,11 @@ public:
     PartitionInfo partitionInfo(const QString& device) const;          // PARTTYPE+FSTYPE+LABEL in one lsblk call
     static bool matchesEspPartitionType(const QString& partType);
     static bool matchesLinuxPartitionType(const QString& partType);
+    // Parses `lsblk -n -P -o PARTTYPE,FSTYPE,LABEL` output (KEY="VALUE" pairs, one line
+    // per device) into a PartitionInfo, unescaping lsblk's \xHH hex-escaping. If given
+    // multiple rows, only the last row's fields are kept - callers needing "does any
+    // row match" semantics (e.g. across a disk's child partitions) must not use this.
+    static PartitionInfo parsePartitionInfo(const QString& lsblkPairsOutput);
 
     // Operations (return true on success)
     bool installGrub(const BootRepairOptions& opt);

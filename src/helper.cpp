@@ -37,8 +37,15 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "helper/path_validation.h"
+
 namespace
 {
+using HelperPath::isSafeChildPath;
+using HelperPath::isValidAbsolutePath;
+using HelperPath::isValidRootPath;
+using HelperPath::joinTargetPath;
+
 struct ProcessResult
 {
     bool started = false;
@@ -59,39 +66,6 @@ void writeAndFlush(FILE *stream, const QByteArray &data)
 void printError(const QString &message)
 {
     writeAndFlush(stderr, message.toUtf8() + '\n');
-}
-
-[[nodiscard]] QString joinTargetPath(const QString &rootPath, const QString &path)
-{
-    if (rootPath.isEmpty()) {
-        return path;
-    }
-    return QDir(rootPath).filePath(path.mid(1));
-}
-
-[[nodiscard]] bool isValidRootPath(const QString &rootPath)
-{
-    return rootPath.isEmpty() || (QDir::isAbsolutePath(rootPath) && QDir(rootPath).exists());
-}
-
-[[nodiscard]] bool isValidAbsolutePath(const QString &path)
-{
-    return QDir::isAbsolutePath(path) && !path.contains(QLatin1Char('\n'));
-}
-
-[[nodiscard]] bool isSafeChildPath(const QString &rootPath, const QString &requestedPath)
-{
-    if (rootPath.isEmpty()) {
-        return isValidAbsolutePath(requestedPath);
-    }
-
-    const QString canonicalRoot = QDir(rootPath).canonicalPath();
-    if (canonicalRoot.isEmpty()) {
-        return false;
-    }
-
-    const QString candidate = QDir::cleanPath(joinTargetPath(rootPath, requestedPath));
-    return candidate == canonicalRoot || candidate.startsWith(canonicalRoot + '/');
 }
 
 [[nodiscard]] const QHash<QString, QStringList> &allowedCommands()

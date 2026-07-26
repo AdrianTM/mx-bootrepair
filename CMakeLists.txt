@@ -63,6 +63,8 @@ project(mx-boot-repair
     LANGUAGES CXX
 )
 
+include(CTest)
+
 # Use the full version string (with suffix like "arch") if available, otherwise use CMake's numeric version
 if(DEFINED PROJECT_VERSION_FULL)
     set(PROJECT_DISPLAY_VERSION "${PROJECT_VERSION_FULL}")
@@ -134,6 +136,8 @@ set(SOURCES
 
 set(HELPER_SOURCES
     src/helper.cpp
+    src/helper/path_validation.cpp
+    src/helper/path_validation.h
 )
 
 set(HEADERS
@@ -195,6 +199,8 @@ add_executable(mx-boot-repair
     ${RESOURCE_FILES}
     src/cli/controller.cpp
     src/cli/controller.h
+    src/cli/validation.cpp
+    src/cli/validation.h
 )
 
 add_executable(helper
@@ -215,6 +221,10 @@ target_link_libraries(helper
 
 # Allow GUI sources to include headers from src/ (e.g., core/..., common.h)
 target_include_directories(mx-boot-repair PUBLIC
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_include_directories(helper PRIVATE
     ${CMAKE_SOURCE_DIR}/src
 )
 
@@ -309,11 +319,17 @@ if(BUILD_CLI)
         src/cli/main.cpp
         src/cli/controller.cpp
         src/cli/controller.h
+        src/cli/validation.cpp
+        src/cli/validation.h
     )
 
     target_link_libraries(mx-boot-repair-cli
         bootrepair-core
         Qt6::Core
+    )
+
+    target_include_directories(mx-boot-repair-cli PRIVATE
+        ${CMAKE_SOURCE_DIR}/src
     )
 
     target_compile_definitions(mx-boot-repair-cli PRIVATE
@@ -326,6 +342,54 @@ if(BUILD_CLI)
         OUTPUT_NAME "mx-boot-repair-cli"
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
     )
+endif()
+
+if(BUILD_TESTING)
+    add_executable(mxbr-cli-test-bin
+        tests/cli_test_main.cpp
+        src/cli/controller.cpp
+        src/cli/controller.h
+        src/cli/validation.cpp
+        src/cli/validation.h
+    )
+    target_link_libraries(mxbr-cli-test-bin
+        bootrepair-core
+        Qt6::Core
+    )
+    target_include_directories(mxbr-cli-test-bin PRIVATE
+        ${CMAKE_SOURCE_DIR}/src
+    )
+
+    add_executable(mxbr-unit-tests
+        tests/unit_tests.cpp
+        src/cli/validation.cpp
+        src/cli/validation.h
+        src/helper/path_validation.cpp
+        src/helper/path_validation.h
+    )
+    target_link_libraries(mxbr-unit-tests
+        bootrepair-core
+        Qt6::Core
+    )
+    target_include_directories(mxbr-unit-tests PRIVATE
+        ${CMAKE_SOURCE_DIR}/src
+    )
+    target_compile_definitions(mxbr-unit-tests PRIVATE
+        TEST_CLI_PATH="$<TARGET_FILE:mxbr-cli-test-bin>"
+    )
+    add_dependencies(mxbr-unit-tests mxbr-cli-test-bin)
+
+    foreach(test_target mxbr-cli-test-bin mxbr-unit-tests)
+        target_compile_options(${test_target} PRIVATE
+            -Wpedantic
+            -Werror=return-type
+            -Werror=switch
+            -Werror=uninitialized
+            -Werror
+        )
+    endforeach()
+
+    add_test(NAME mxbr-unit-tests COMMAND mxbr-unit-tests)
 endif()
 
 # Install target (required by Debian build system)

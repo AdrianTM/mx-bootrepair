@@ -5,6 +5,7 @@
 #include <QCommandLineParser>
 #include <limits>
 
+#include "cli/validation.h"
 #include "core/bootrepair_engine.h"
 
 namespace {
@@ -101,32 +102,14 @@ int CliController::run()
         return 2;
     }
 
-    auto normalizeDev = [](const QString& dev, bool requireDevPrefix) -> QString {
-        if (dev.isEmpty()) return dev;
-        if (requireDevPrefix) {
-            return dev.startsWith("/dev/") ? dev : "/dev/" + dev;
-        } else {
-            return dev.startsWith("/dev/") ? dev.mid(5) : dev;
-        }
-    };
-
     auto validateDevicePath = [&out](const QString& dev, const QString& name) -> bool {
-        if (dev.isEmpty()) return true; // Empty is valid (optional)
-        if (dev.startsWith("/dev/")) {
-            // Check if it looks like a valid device path
-            const QString devName = dev.mid(5);
-            if (devName.isEmpty() || devName.contains('/')) {
-                out << "Error: Invalid " << name << " device path: " << dev << "\n";
-                return false;
-            }
-        } else {
-            // Check if it looks like a valid device name
-            if (dev.contains('/') || dev.isEmpty()) {
-                out << "Error: Invalid " << name << " device name: " << dev << "\n";
-                return false;
-            }
+        if (CliValidation::isValidDevice(dev)) {
+            return true;
         }
-        return true;
+        out << "Error: Invalid " << name
+            << (dev.startsWith("/dev/") ? " device path: " : " device name: ")
+            << dev << "\n";
+        return false;
     };
 
     const bool nonInteractive = parser.isSet(nonIntOpt) || parser.isSet(actionOpt);
@@ -158,10 +141,10 @@ int CliController::run()
                 out << "Error: --location is required for ESP/Root target\n"; return 2;
             }
 
-            opt.location = normalizeDev(parser.value(locationOpt), /*requireDevPrefix*/ false);
-            opt.root = normalizeDev(parser.value(rootOpt), /*requireDevPrefix*/ true);
-            opt.bootDevice = normalizeDev(parser.value(bootDevOpt), /*requireDevPrefix*/ true);
-            opt.espDevice = normalizeDev(parser.value(espDevOpt), /*requireDevPrefix*/ true);
+            opt.location = CliValidation::normalizeDevice(parser.value(locationOpt), /*requireDevPrefix*/ false);
+            opt.root = CliValidation::normalizeDevice(parser.value(rootOpt), /*requireDevPrefix*/ true);
+            opt.bootDevice = CliValidation::normalizeDevice(parser.value(bootDevOpt), /*requireDevPrefix*/ true);
+            opt.espDevice = CliValidation::normalizeDevice(parser.value(espDevOpt), /*requireDevPrefix*/ true);
 
             // Validate device paths
             if (!validateDevicePath(opt.location, "location") ||
@@ -176,9 +159,9 @@ int CliController::run()
             }
             const bool ok = engine.installGrub(opt); return ok ? 0 : 1;
         } else if (action == "repair" || action == "update-grub") {
-            opt.root = normalizeDev(parser.value(rootOpt), /*requireDevPrefix*/ true);
-            opt.bootDevice = normalizeDev(parser.value(bootDevOpt), /*requireDevPrefix*/ true);
-            opt.espDevice = normalizeDev(parser.value(espDevOpt), /*requireDevPrefix*/ true);
+            opt.root = CliValidation::normalizeDevice(parser.value(rootOpt), /*requireDevPrefix*/ true);
+            opt.bootDevice = CliValidation::normalizeDevice(parser.value(bootDevOpt), /*requireDevPrefix*/ true);
+            opt.espDevice = CliValidation::normalizeDevice(parser.value(espDevOpt), /*requireDevPrefix*/ true);
 
             // Validate device paths
             if (!validateDevicePath(opt.root, "root") ||
@@ -190,7 +173,7 @@ int CliController::run()
             if (opt.root.isEmpty()) { out << "Error: --root is required for repair\n"; return 2; }
             const bool ok = engine.repairGrub(opt); return ok ? 0 : 1;
         } else if (action == "initramfs" || action == "regenerate-initramfs") {
-            opt.root = normalizeDev(parser.value(rootOpt), /*requireDevPrefix*/ true);
+            opt.root = CliValidation::normalizeDevice(parser.value(rootOpt), /*requireDevPrefix*/ true);
 
             // Validate device path
             if (!validateDevicePath(opt.root, "root")) {
@@ -200,7 +183,7 @@ int CliController::run()
             if (opt.root.isEmpty()) { out << "Error: --root is required for initramfs\n"; return 2; }
             const bool ok = engine.regenerateInitramfs(opt); return ok ? 0 : 1;
         } else if (action == "backup") {
-            opt.location = normalizeDev(parser.value(locationOpt), /*requireDevPrefix*/ false);
+            opt.location = CliValidation::normalizeDevice(parser.value(locationOpt), /*requireDevPrefix*/ false);
             opt.backupPath = parser.value(pathOpt);
 
             // Validate device path
@@ -211,7 +194,7 @@ int CliController::run()
             if (opt.location.isEmpty() || opt.backupPath.isEmpty()) { out << "Error: --location and --backup-path required for backup\n"; return 2; }
             const bool ok = engine.backup(opt); return ok ? 0 : 1;
         } else if (action == "restore") {
-            opt.location = normalizeDev(parser.value(locationOpt), /*requireDevPrefix*/ false);
+            opt.location = CliValidation::normalizeDevice(parser.value(locationOpt), /*requireDevPrefix*/ false);
             opt.backupPath = parser.value(pathOpt);
 
             // Validate device path
