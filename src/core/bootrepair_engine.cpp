@@ -413,6 +413,27 @@ bool BootRepairEngine::matchesLinuxPartitionType(const QString& partType)
     return rx.match(partType).hasMatch();
 }
 
+static QString unescapeLsblkHex(const QString& value)
+{
+    static const QRegularExpression rx(QStringLiteral(R"re(\\x([0-9A-Fa-f]{2}))re"));
+    QString result;
+    result.reserve(value.size());
+    int lastEnd = 0;
+    auto it = rx.globalMatch(value);
+    while (it.hasNext()) {
+        const auto match = it.next();
+        result += value.mid(lastEnd, match.capturedStart() - lastEnd);
+        bool ok = false;
+        const int byte = match.captured(1).toInt(&ok, 16);
+        result += ok ? QChar(byte) : match.captured(0);
+        lastEnd = match.capturedEnd();
+    }
+    result += value.mid(lastEnd);
+    return result;
+}
+
+// This aggregate is used for single partitions. Whole-disk type checks use dedicated
+// multi-row queries so any matching child partition is detected.
 PartitionInfo BootRepairEngine::partitionInfo(const QString& device) const
 {
     const QString dev = normalizeDev(device);
@@ -427,7 +448,7 @@ PartitionInfo BootRepairEngine::partitionInfo(const QString& device) const
     while (it.hasNext()) {
         const auto match = it.next();
         const QString key = match.captured(1);
-        const QString value = match.captured(2);
+        const QString value = unescapeLsblkHex(match.captured(2));
         if (key == QLatin1String("PARTTYPE")) {
             info.partType = value;
         } else if (key == QLatin1String("FSTYPE")) {
@@ -441,12 +462,22 @@ PartitionInfo BootRepairEngine::partitionInfo(const QString& device) const
 
 bool BootRepairEngine::isEspPartition(const QString& device) const
 {
-    return matchesEspPartitionType(partitionInfo(device).partType);
+    const QString dev = normalizeDev(device);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -ln -o PARTTYPE %1").arg(dev));
+    QString output;
+    shell->proc("lsblk", {"-ln", "-o", "PARTTYPE", dev}, &output, nullptr, QuietMode::Yes);
+    return matchesEspPartitionType(output);
 }
 
 bool BootRepairEngine::isLinuxPartitionType(const QString& device) const
 {
-    return matchesLinuxPartitionType(partitionInfo(device).partType);
+    const QString dev = normalizeDev(device);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -ln -o PARTTYPE %1").arg(dev));
+    QString output;
+    shell->proc("lsblk", {"-ln", "-o", "PARTTYPE", dev}, &output, nullptr, QuietMode::Yes);
+    return matchesLinuxPartitionType(output);
 }
 
 bool BootRepairEngine::labelContains(const QString& device, const QString& needle) const
