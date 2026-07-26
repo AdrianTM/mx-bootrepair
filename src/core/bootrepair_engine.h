@@ -69,7 +69,7 @@ private:
                                 QString* output = nullptr, const QByteArray* input = nullptr, bool quiet = true);
 
     // helpers
-    bool isMountedTo(const QString& volume, const QString& mount) const;
+    bool isMountedTo(const QString& volume, const QString& mount, bool* queryFailed = nullptr) const;
     QString luksMapper(const QString& part) const; // returns mapper name or empty
     bool openLuks(const QString& part, const QString& mapper, const QByteArray& pass);
     bool mountChrootEnv(const QString& path);

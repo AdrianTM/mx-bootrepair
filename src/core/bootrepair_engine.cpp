@@ -333,7 +333,7 @@ bool BootRepairEngine::isMounted(const QString& volume, const QString& mount) co
     return isMountedTo(volume, mount);
 }
 
-bool BootRepairEngine::isMountedTo(const QString& volume, const QString& mount) const
+bool BootRepairEngine::isMountedTo(const QString& volume, const QString& mount, bool* queryFailed) const
 {
     const bool wasSuppressed = shell->outputSuppressed();
     shell->setOutputSuppressed(true);
@@ -343,6 +343,9 @@ bool BootRepairEngine::isMountedTo(const QString& volume, const QString& mount) 
         queried = shell->proc("lsblk", {"-nro", "MOUNTPOINT", volume}, &points, nullptr, QuietMode::Yes);
     }
     shell->setOutputSuppressed(wasSuppressed);
+    if (queryFailed) {
+        *queryFailed = !queried;
+    }
     if (!queried) {
         // Empty output is normal for an unmounted device; only warn when lsblk itself failed.
         qWarning().noquote() << "isMountedTo: lsblk failed to query mount points for" << volume;
@@ -588,7 +591,14 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
     QString mapper;
 
     // If already mounted, no need to unlock LUKS
-    if (!isMountedTo(root, "/")) {
+    bool mountQueryFailed = false;
+    if (!isMountedTo(root, "/", &mountQueryFailed)) {
+        if (mountQueryFailed) {
+            emit log(QStringLiteral("Could not determine whether %1 is mounted; aborting.").arg(root));
+            emit finished(false);
+            currentDryRun_ = false;
+            return false;
+        }
         mapper = luksMapper(root);
         if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
             if (!openLuks(root, mapper, opt.luksPassword)) {
@@ -797,7 +807,14 @@ bool BootRepairEngine::repairGrub(const BootRepairOptions& opt)
     QString mapper;
 
     // If already mounted, no need to unlock LUKS
-    if (!isMountedTo(root, "/")) {
+    bool mountQueryFailed = false;
+    if (!isMountedTo(root, "/", &mountQueryFailed)) {
+        if (mountQueryFailed) {
+            emit log(QStringLiteral("Could not determine whether %1 is mounted; aborting.").arg(root));
+            emit finished(false);
+            currentDryRun_ = false;
+            return false;
+        }
         mapper = luksMapper(root);
         if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
             if (!openLuks(root, mapper, opt.luksPassword)) {
@@ -868,7 +885,14 @@ bool BootRepairEngine::regenerateInitramfs(const BootRepairOptions& opt)
     QString mapper;
 
     // If already mounted, no need to unlock LUKS
-    if (!isMountedTo(root, "/")) {
+    bool mountQueryFailed = false;
+    if (!isMountedTo(root, "/", &mountQueryFailed)) {
+        if (mountQueryFailed) {
+            emit log(QStringLiteral("Could not determine whether %1 is mounted; aborting.").arg(root));
+            emit finished(false);
+            currentDryRun_ = false;
+            return false;
+        }
         mapper = luksMapper(root);
         if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
             if (!openLuks(root, mapper, opt.luksPassword)) {
