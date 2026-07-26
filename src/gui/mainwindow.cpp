@@ -178,6 +178,7 @@ bool MainWindow::handleElevationFailure()
 void MainWindow::installGRUB()
 {
     BootRepairOptions opt;
+    SecureBuffer _scrubOptPass(&opt.luksPassword);
     opt.location = ui->comboLocation->currentText().section(' ', 0, 0);
     opt.root = "/dev/" + ui->comboRoot->currentText().section(' ', 0, 0);
     opt.target = ui->radioGrubEsp->isChecked() ? GrubTarget::Esp
@@ -247,6 +248,7 @@ void MainWindow::repairGRUB()
 {
     const QString root = "/dev/" + ui->comboLocation->currentText().section(' ', 0, 0);
     BootRepairOptions opt;
+    SecureBuffer _scrubOptPass(&opt.luksPassword);
     opt.root = root;
     if (!engine->isMounted(opt.root, "/")) {
         const bool isLuks = engine->isLuks(opt.root);
@@ -302,6 +304,7 @@ void MainWindow::repairGRUB()
 void MainWindow::regenerateInitramfs()
 {
     BootRepairOptions opt;
+    SecureBuffer _scrubOptPass(&opt.luksPassword);
     opt.root = "/dev/" + ui->comboRoot->currentText().section(' ', 0, 0);
     if (!engine->isMounted(opt.root, "/")) {
         const bool isLuks = engine->isLuks(opt.root);
