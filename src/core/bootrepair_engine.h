@@ -9,6 +9,12 @@
 
 enum class GrubTarget { Mbr, Esp, Root };
 
+struct PartitionInfo {
+    QString partType;
+    QString fsType;
+    QString label;
+};
+
 struct BootRepairOptions {
     GrubTarget target {GrubTarget::Mbr};
     QString location;   // e.g. "sda" for MBR, "sda1" for ESP/Root
@@ -38,6 +44,9 @@ public:
     bool labelContains(const QString& device, const QString& needle) const; // sdaX or /dev/sdaX
     QString filesystemType(const QString& device) const;               // sdaX or /dev/sdaX
     QString partitionLabel(const QString& device) const;               // sdaX or /dev/sdaX
+    PartitionInfo partitionInfo(const QString& device) const;          // PARTTYPE+FSTYPE+LABEL in one lsblk call
+    static bool matchesEspPartitionType(const QString& partType);
+    static bool matchesLinuxPartitionType(const QString& partType);
 
     // Operations (return true on success)
     bool installGrub(const BootRepairOptions& opt);

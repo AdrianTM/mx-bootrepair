@@ -397,54 +397,71 @@ QString BootRepairEngine::mountSource(const QString& mountpoint) const
     return output.trimmed();
 }
 
-bool BootRepairEngine::isEspPartition(const QString& device) const
+bool BootRepairEngine::matchesEspPartitionType(const QString& partType)
 {
-    const QString dev = normalizeDev(device);
-    emit const_cast<BootRepairEngine*>(this)->log(
-        QStringLiteral("$ lsblk -ln -o PARTTYPE %1").arg(dev));
-    QString output;
-    shell->proc("lsblk", {"-ln", "-o", "PARTTYPE", dev}, &output, nullptr, QuietMode::Yes);
     static const QRegularExpression rx(QStringLiteral("c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef"),
                                         QRegularExpression::CaseInsensitiveOption);
-    return rx.match(output).hasMatch();
+    return rx.match(partType).hasMatch();
 }
 
-bool BootRepairEngine::isLinuxPartitionType(const QString& device) const
+bool BootRepairEngine::matchesLinuxPartitionType(const QString& partType)
 {
-    const QString dev = normalizeDev(device);
-    emit const_cast<BootRepairEngine*>(this)->log(
-        QStringLiteral("$ lsblk -ln -o PARTTYPE %1").arg(dev));
-    QString output;
-    shell->proc("lsblk", {"-ln", "-o", "PARTTYPE", dev}, &output, nullptr, QuietMode::Yes);
     static const QRegularExpression rx(
         QStringLiteral("0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|"
                        "44479540-F297-41B2-9AF7-D131D5F0458A|4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709"),
         QRegularExpression::CaseInsensitiveOption);
-    return rx.match(output).hasMatch();
+    return rx.match(partType).hasMatch();
+}
+
+PartitionInfo BootRepairEngine::partitionInfo(const QString& device) const
+{
+    const QString dev = normalizeDev(device);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -n -P -o PARTTYPE,FSTYPE,LABEL %1").arg(dev));
+    QString output;
+    shell->proc("lsblk", {"-n", "-P", "-o", "PARTTYPE,FSTYPE,LABEL", dev}, &output, nullptr, QuietMode::Yes);
+
+    PartitionInfo info;
+    static const QRegularExpression rx(QStringLiteral(R"re((\w+)="([^"]*)")re"));
+    auto it = rx.globalMatch(output);
+    while (it.hasNext()) {
+        const auto match = it.next();
+        const QString key = match.captured(1);
+        const QString value = match.captured(2);
+        if (key == QLatin1String("PARTTYPE")) {
+            info.partType = value;
+        } else if (key == QLatin1String("FSTYPE")) {
+            info.fsType = value;
+        } else if (key == QLatin1String("LABEL")) {
+            info.label = value;
+        }
+    }
+    return info;
+}
+
+bool BootRepairEngine::isEspPartition(const QString& device) const
+{
+    return matchesEspPartitionType(partitionInfo(device).partType);
+}
+
+bool BootRepairEngine::isLinuxPartitionType(const QString& device) const
+{
+    return matchesLinuxPartitionType(partitionInfo(device).partType);
 }
 
 bool BootRepairEngine::labelContains(const QString& device, const QString& needle) const
 {
-    const QString dev = normalizeDev(device);
-    emit const_cast<BootRepairEngine*>(this)->log(
-        QStringLiteral("$ lsblk -ln -o LABEL %1").arg(dev));
-    QString output;
-    shell->proc("lsblk", {"-ln", "-o", "LABEL", dev}, &output, nullptr, QuietMode::Yes);
-    return output.contains(needle);
+    return partitionInfo(device).label.contains(needle);
 }
 
 QString BootRepairEngine::filesystemType(const QString& device) const
 {
-    QString output;
-    shell->proc("lsblk", {"-ln", "-o", "FSTYPE", normalizeDev(device)}, &output, nullptr, QuietMode::Yes);
-    return output.trimmed();
+    return partitionInfo(device).fsType;
 }
 
 QString BootRepairEngine::partitionLabel(const QString& device) const
 {
-    QString output;
-    shell->proc("lsblk", {"-ln", "-o", "LABEL", normalizeDev(device)}, &output, nullptr, QuietMode::Yes);
-    return output.trimmed();
+    return partitionInfo(device).label;
 }
 
 bool BootRepairEngine::openLuks(const QString& part, const QString& mapper, const QByteArray& pass)

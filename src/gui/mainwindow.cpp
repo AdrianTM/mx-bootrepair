@@ -74,16 +74,13 @@ void clearBusyCursor()
     }
 }
 
-bool isPreferredRootCandidate(BootRepairEngine *engine, const QString &part)
+bool isPreferredRootCandidate(const PartitionInfo &info)
 {
-    const QString device = part.section(' ', 0, 0);
-    const QString fstype = engine->filesystemType(device).trimmed();
-    if (fstype.compare(QStringLiteral("exfat"), Qt::CaseInsensitive) == 0) {
+    if (info.fsType.trimmed().compare(QStringLiteral("exfat"), Qt::CaseInsensitive) == 0) {
         return false;
     }
 
-    const QString label = engine->partitionLabel(device).trimmed();
-    if (label.compare(QStringLiteral("boot"), Qt::CaseInsensitive) == 0) {
+    if (info.label.trimmed().compare(QStringLiteral("boot"), Qt::CaseInsensitive) == 0) {
         return false;
     }
 
@@ -387,7 +384,8 @@ void MainWindow::guessPartition()
     // find first a partition with rootMX* label
     for (int index = 0; index < ui->comboRoot->count(); index++) {
         QString part = ui->comboRoot->itemText(index);
-        if (isPreferredRootCandidate(engine, part) && engine->labelContains(part.section(' ', 0, 0), "rootMX")) {
+        const PartitionInfo info = engine->partitionInfo(part.section(' ', 0, 0));
+        if (isPreferredRootCandidate(info) && info.label.contains("rootMX")) {
             ui->comboRoot->setCurrentIndex(index);
             // select the same location by default for GRUB and /boot
             if (ui->radioGrubRoot->isChecked()) {
@@ -399,7 +397,8 @@ void MainWindow::guessPartition()
     // it it cannot find rootMX*, look for Linux partitions
     for (int index = 0; index < ui->comboRoot->count(); index++) {
         QString part = ui->comboRoot->itemText(index);
-        if (isPreferredRootCandidate(engine, part) && engine->isLinuxPartitionType(part.section(' ', 0, 0))) {
+        const PartitionInfo info = engine->partitionInfo(part.section(' ', 0, 0));
+        if (isPreferredRootCandidate(info) && BootRepairEngine::matchesLinuxPartitionType(info.partType)) {
             ui->comboRoot->setCurrentIndex(index);
             break;
         }
