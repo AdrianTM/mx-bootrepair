@@ -8,6 +8,7 @@
 #include "cmd.h"
 
 enum class GrubTarget { Mbr, Esp, Root };
+enum class MountState { Mounted, NotMounted, QueryFailed };
 
 struct PartitionInfo {
     QString partType;
@@ -35,7 +36,7 @@ public:
     QStringList listDisks() const;      // pretty strings from lsblk
     QStringList listPartitions() const; // pretty strings from lsblk
     static bool isUefi();
-    bool isMounted(const QString& volume, const QString& mount) const; // public wrapper
+    MountState isMounted(const QString& volume, const QString& mount) const; // public wrapper
     bool isLuks(const QString& device) const;                          // /dev/...
     bool canUnlockLuks(const QString& device, const QByteArray& pass);
     bool isEspPartition(const QString& device) const;                  // sda1 or /dev/sda1
@@ -69,7 +70,7 @@ private:
                                 QString* output = nullptr, const QByteArray* input = nullptr, bool quiet = true);
 
     // helpers
-    bool isMountedTo(const QString& volume, const QString& mount, bool* queryFailed = nullptr) const;
+    MountState isMountedTo(const QString& volume, const QString& mount) const;
     QString luksMapper(const QString& part) const; // returns mapper name or empty
     bool openLuks(const QString& part, const QString& mapper, const QByteArray& pass);
     bool mountChrootEnv(const QString& path);

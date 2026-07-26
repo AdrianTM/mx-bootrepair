@@ -184,7 +184,14 @@ void MainWindow::installGRUB()
     opt.target = ui->radioGrubEsp->isChecked() ? GrubTarget::Esp
                                                : (ui->radioGrubRoot->isChecked() ? GrubTarget::Root : GrubTarget::Mbr);
 
-    if (!engine->isMounted(opt.root, "/")) {
+    const MountState rootMountState = engine->isMounted(opt.root, "/");
+    if (rootMountState == MountState::QueryFailed) {
+        QMessageBox::critical(this, tr("Error"),
+                              tr("Could not determine whether %1 is mounted.").arg(opt.root));
+        refresh();
+        return;
+    }
+    if (rootMountState == MountState::NotMounted) {
         const bool isLuks = engine->isLuks(opt.root);
         if (handleElevationFailure()) {
             return;
@@ -250,7 +257,14 @@ void MainWindow::repairGRUB()
     BootRepairOptions opt;
     SecureBuffer _scrubOptPass(&opt.luksPassword);
     opt.root = root;
-    if (!engine->isMounted(opt.root, "/")) {
+    const MountState rootMountState = engine->isMounted(opt.root, "/");
+    if (rootMountState == MountState::QueryFailed) {
+        QMessageBox::critical(this, tr("Error"),
+                              tr("Could not determine whether %1 is mounted.").arg(opt.root));
+        refresh();
+        return;
+    }
+    if (rootMountState == MountState::NotMounted) {
         const bool isLuks = engine->isLuks(opt.root);
         if (handleElevationFailure()) {
             return;
@@ -306,7 +320,14 @@ void MainWindow::regenerateInitramfs()
     BootRepairOptions opt;
     SecureBuffer _scrubOptPass(&opt.luksPassword);
     opt.root = "/dev/" + ui->comboRoot->currentText().section(' ', 0, 0);
-    if (!engine->isMounted(opt.root, "/")) {
+    const MountState rootMountState = engine->isMounted(opt.root, "/");
+    if (rootMountState == MountState::QueryFailed) {
+        QMessageBox::critical(this, tr("Error"),
+                              tr("Could not determine whether %1 is mounted.").arg(opt.root));
+        refresh();
+        return;
+    }
+    if (rootMountState == MountState::NotMounted) {
         const bool isLuks = engine->isLuks(opt.root);
         if (handleElevationFailure()) {
             return;
@@ -737,11 +758,6 @@ void MainWindow::buttonHelp_clicked()
     }
 
     displayHelpDoc(helpPath, tr("%1 Help").arg(this->windowTitle()));
-}
-
-bool MainWindow::isMountedTo(const QString &volume, const QString &mount)
-{
-    return engine->isMounted(volume, mount);
 }
 
 // chroot mounting now handled in engine

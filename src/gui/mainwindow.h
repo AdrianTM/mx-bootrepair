@@ -59,7 +59,6 @@ private:
     QStringList ListDisk;
     QStringList ListPart;
     QString selectPartFromList(const QString &mountpoint);
-    bool isMountedTo(const QString &volume, const QString &mount);
     static bool isUefi();
     void addDevToList();
     void backupBR(const QString &filename);
