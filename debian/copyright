@@ -3,11 +3,11 @@ Upstream-Name: mx-bootrepair
 Source: https://github.com/AdrianTM/mx-bootrepair
 
 Files: *
-Copyright: 2014-2025 MX Authors
+Copyright: 2014-2026 MX Authors
 License: GPL-3+
 
 Files: debian/*
-Copyright: 2014-2025 MX Authors
+Copyright: 2014-2026 MX Authors
 License: GPL-3+
 
 License: GPL-3+
